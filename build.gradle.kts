@@ -17,7 +17,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.2")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 }
 
 tasks.test {
