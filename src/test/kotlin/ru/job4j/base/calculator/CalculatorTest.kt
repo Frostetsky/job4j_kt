@@ -1,31 +1,39 @@
 package ru.job4j.base.calculator
 
-import io.kotlintest.shouldBe
-import io.kotlintest.specs.StringSpec
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
-class CalculatorTest : StringSpec({
-    val calc = Calculator()
-    "1 + 1 = 2" {
-        calc.fold(1, 1) shouldBe 2
+class CalculatorTest {
+
+    private val calculator = Calculator()
+
+    @Test
+    fun testMultiple() {
+        Assertions.assertEquals(20, calculator.multiple(4, 5));
     }
 
-    "1 - 1 = 0" {
-        calc.subtract(1, 1) shouldBe 0
+    @Test
+    fun testDivide() {
+        Assertions.assertEquals(calculator.divide(2, 4), 0.5)
     }
 
-    "2 * 10 = 20" {
-        calc.multiple(2, 10) shouldBe 20
+    @Test
+    fun testFold() {
+        Assertions.assertEquals(calculator.fold(2, 3), 5)
     }
 
-    "2 / 10 = 0.2" {
-        calc.divide(2, 10) shouldBe 0.2
+    @Test
+    fun testSubtract() {
+        Assertions.assertEquals(calculator.subtract(5, 7), -2)
     }
 
-    "2 / 0 = infinity" {
-        calc.divide(2, 0) shouldBe Double.POSITIVE_INFINITY
+    @Test
+    fun testDivideOnZeroRight() {
+        Assertions.assertEquals(calculator.divide(2, 0), Double.POSITIVE_INFINITY)
     }
 
-    "-5 / 0 = -infinity" {
-        calc.divide(-3, 0) shouldBe Double.NEGATIVE_INFINITY
+    @Test
+    fun testDivideOnZeroLeft() {
+        Assertions.assertEquals(calculator.divide(-3, 0), Double.NEGATIVE_INFINITY)
     }
-})
+}
