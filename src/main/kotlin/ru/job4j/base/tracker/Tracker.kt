@@ -14,7 +14,7 @@ class Tracker {
      * @param item новая заявка.
      */
     fun add(item : Item) : Item {
-        item.setId(generateId())
+        item.id = generateId()
         store += item
         return item
     }
@@ -45,7 +45,7 @@ class Tracker {
     fun findByName(name : String) : MutableList<Item> {
         val rsl = arrayListOf<Item>();
         for (item in store) {
-            if (name == item.getName()) {
+            if (name == item.name) {
                 rsl += item
             }
         }
@@ -61,7 +61,7 @@ class Tracker {
     fun replace(id : Int, item: Item) : Boolean {
         val index = indexOf(id)
         if (index != INCORRECT_INDEX) {
-            item.setId(id)
+            item.id = id
             store[index] = item
             return true
         }
@@ -90,7 +90,7 @@ class Tracker {
     private fun indexOf(id : Int) : Int {
         var rsl = INCORRECT_INDEX
         for (index in store.indices) {
-            if (store[index].getId() == id) {
+            if (store[index].id == id) {
                 rsl = index
                 break
             }
