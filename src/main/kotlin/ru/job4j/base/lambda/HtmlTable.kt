@@ -2,14 +2,16 @@ package ru.job4j.base.lambda
 
 class HtmlTable {
 
-    fun table(): String {
+    fun table(row: Int, cell: Int): String {
         StringBuilder().apply {
             append("<table>")
-            append("<tr>")
-            append("<td>")
-            append("<tr>Id</tr>")
-            append("<tr>Name</tr>")
-            append("</td>")
+            for (rows in 0 .. row) {
+                append("<tr>")
+                for (cells in 0 .. cell) {
+                    append("<td></td>")
+                }
+                append("</tr>")
+            }
             append("</table>")
             return toString()
         }
