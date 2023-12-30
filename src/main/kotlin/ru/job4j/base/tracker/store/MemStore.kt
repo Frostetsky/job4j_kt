@@ -1,11 +1,12 @@
-package ru.job4j.base.tracker
+package ru.job4j.base.tracker.store
 
+import ru.job4j.base.tracker.model.Item
 import kotlin.math.absoluteValue
 import kotlin.random.Random
 
 const val INCORRECT_INDEX = 1;
 
-class Tracker {
+class MemStore : Store {
 
     private val store = arrayListOf<Item>()
 
@@ -13,7 +14,7 @@ class Tracker {
      * Метод реализующий добавление заявки в хранилище.
      * @param item новая заявка.
      */
-    fun add(item : Item) : Item {
+    override fun add(item: Item): Item {
         item.id = generateId()
         store += item
         return item
@@ -24,7 +25,7 @@ class Tracker {
      * @param id - id заявки.
      * @return Нужная заявка.
      */
-    fun findById(id : Int) : Item? {
+    override fun findById(id: Int): Item? {
         val index = indexOf(id)
         return if (index != INCORRECT_INDEX) store[index] else null
     }
@@ -33,7 +34,7 @@ class Tracker {
      * Возвращает список заявок.
      * @return список заявок.
      */
-    fun findAll() : MutableList<Item> {
+    override fun findAll(): MutableList<Item> {
         return ArrayList(store)
     }
 
@@ -42,7 +43,7 @@ class Tracker {
      * @key Ключ для нахождения сходства в массиве items
      * @return Лист итемов с одинаковыми именами.
      */
-    fun findByName(name : String) : MutableList<Item> {
+    override fun findByName(name: String): MutableList<Item> {
         val rsl = arrayListOf<Item>();
         for (item in store) {
             if (name == item.name) {
@@ -58,7 +59,7 @@ class Tracker {
      * @param item новая заявка.
      * @return успешность результата выполнения.
      */
-    fun replace(id : Int, item: Item) : Boolean {
+    override fun replace(id: Int, item: Item): Boolean {
         val index = indexOf(id)
         if (index != INCORRECT_INDEX) {
             item.id = id
@@ -73,7 +74,7 @@ class Tracker {
      * @param id - id заявки.
      * @return успешность результата выполнения.
      */
-    fun remove(id: Int) : Boolean {
+    override fun remove(id: Int): Boolean {
         val index = indexOf(id)
         if (index != INCORRECT_INDEX) {
             store.removeAt(index);
@@ -87,7 +88,7 @@ class Tracker {
      * @param id - id заявки.
      * @return индекс ячейки под которым содержится нужный объект.
      */
-    private fun indexOf(id : Int) : Int {
+    private fun indexOf(id: Int): Int {
         var rsl = INCORRECT_INDEX
         for (index in store.indices) {
             if (store[index].id == id) {
@@ -98,5 +99,5 @@ class Tracker {
         return rsl
     }
 
-    private fun generateId() : Int = Random.nextInt().absoluteValue
+    private fun generateId(): Int = Random.nextInt().absoluteValue
 }
