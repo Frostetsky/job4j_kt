@@ -1,6 +1,6 @@
 package ru.job4j.base.bank
 
-data class AccountBank(val requisite: String, val balance: Double) {
+data class AccountBank(var requisite: String, var balance: Double) {
 
     fun get() = balance
 
