@@ -2,11 +2,9 @@ package ru.job4j.base.bank
 
 class BankService {
 
-    private val users = HashMap<User, List<AccountBank>>()
+    private val users = HashMap<User, ArrayList<AccountBank>>()
 
-    fun addUser(user: User) {
-        users.putIfAbsent(user, ArrayList())
-    }
+    fun addUser(user: User) = users.putIfAbsent(user, ArrayList())
 
     fun findByRequisite(passport: String, requisite: String): AccountBank? {
         val user = findByPassport(passport)
@@ -15,7 +13,7 @@ class BankService {
 
     fun addAccount(passport: String, accountBank: AccountBank) {
         val user = findByPassport(passport)
-        users[user]?.plus(accountBank)
+        users[user]?.add(accountBank)
     }
 
     fun findByPassport(passport: String): User? = users.keys.firstOrNull{ it.passport == passport }
