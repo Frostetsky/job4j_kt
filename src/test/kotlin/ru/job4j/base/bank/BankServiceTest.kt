@@ -2,6 +2,7 @@ package ru.job4j.base.bank
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import ru.job4j.base.account.Account
 
 class BankServiceTest {
 
@@ -21,5 +22,14 @@ class BankServiceTest {
         bankService.addUser(User("123", "Nikita"))
         assertNull(bankService.findByPassport("215"))
         assertNull(bankService.findByRequisite("524", "555"))
+    }
+
+    @Test
+    fun findAccounts() {
+        val bankService = BankService()
+        bankService.addUser(User("123", "Nikita"))
+        bankService.addAccount("123", AccountBank("555", 0.0))
+        assertNull(bankService.findAccounts("215"))
+        assertNotNull(bankService.findAccounts("123"))
     }
 }

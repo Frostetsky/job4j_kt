@@ -16,6 +16,8 @@ class BankService {
         users[user]?.add(accountBank)
     }
 
+    fun findAccounts(passport: String): ArrayList<AccountBank>? = findByPassport(passport)?.let { user -> users[user] }
+
     fun findByPassport(passport: String): User? = users.keys.firstOrNull{ it.passport == passport }
 
     fun transferMoney(srcPassport: String, srcRequisite: String,
