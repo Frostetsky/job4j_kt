@@ -7,8 +7,6 @@ class AccountServiceTest {
 
     @Test
     fun testGetAccountByPredicate() {
-        val nameHasIvanAndBalanceMoreZero = { account: Account -> (
-                account.name.contains("Ivan").and(account.balance > 0)) }
 
         val accountService = AccountService()
 
@@ -20,7 +18,10 @@ class AccountServiceTest {
             Account(name = "Ivan Norgov", balance = 35)
         )
 
-        val rsl = accountService.getAccountsByPredicate(listAccounts, nameHasIvanAndBalanceMoreZero)
+        val rsl = accountService.getAccountsByPredicate(
+            listAccounts,
+            { account: Account -> account.name.contains("Ivan") },
+            { account: Account -> account.balance > 0 })
 
         assertEquals(rsl[0], Account(name = "Ivan Morganick", balance = 150))
         assertEquals(rsl[1], Account(name = "Ivan Norgov", balance = 35))

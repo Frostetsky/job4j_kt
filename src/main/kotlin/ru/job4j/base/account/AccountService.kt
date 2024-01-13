@@ -3,6 +3,7 @@ package ru.job4j.base.account
 class AccountService {
 
     fun getAccountsByPredicate(accounts: List<Account>,
-                               predicate: (Account) -> Boolean): List<Account> = accounts.filter(predicate)
-
+                               vararg predicates: (Account) -> Boolean): List<Account> {
+        return accounts.filter { account -> predicates.all { it(account) } }
+    }
 }
